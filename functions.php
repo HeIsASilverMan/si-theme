@@ -5,9 +5,22 @@ function si_theme_setup() {
     add_theme_support( 'title-tag' );
     add_theme_support( 'post-thumbnails' );
     add_theme_support( 'html5', array( 'search-form', 'comment-form', 'gallery', 'caption' ) );
+    add_theme_support( 'custom-logo', array(
+        'height'      => 60,
+        'width'       => 200,
+        'flex-height' => true,
+        'flex-width'  => true,
+    ) );
+    add_theme_support( 'site-icon' );
     register_nav_menus( array( 'primary' => 'Primary Navigation' ) );
 }
 add_action( 'after_setup_theme', 'si_theme_setup' );
+
+add_action( 'si_header', function() {
+    if ( has_custom_logo() ) {
+        echo '<div class="si-logo">' . get_custom_logo() . '</div>';
+    }
+} );
 
 // Force dark background - output first thing in head
 add_action( 'wp_head', function() {
